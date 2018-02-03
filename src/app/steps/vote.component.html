@@ -1,0 +1,14 @@
+<section id="entries">
+  <h3>Vote or die!</h3>
+
+  <article
+          *ngFor="let entry of listEntries"
+          [class.active]="entrySelected(entry.userId, entry.file)"
+          (click)="selectEntry(entry.userId, entry.file)">{{'entry ' + entrySelected(entry.userId, entry.file)}}
+    <span class="votes">{{entry.votes.length}}</span>
+    <img src="{{entry.file}}" />
+  </article>
+
+  <div class="clearfix"></div>
+
+</section>

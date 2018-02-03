@@ -1,0 +1,12 @@
+.input-row > * {
+    display: inline-block;
+}
+
+.mat-form-field {
+    width: 450px;
+    margin-right: 1em;
+}
+
+.mat-form-field .mat-form-field-prefix {
+    color: rgba(0,0,0,.54);
+}

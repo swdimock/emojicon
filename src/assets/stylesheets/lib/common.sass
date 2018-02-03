@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto')
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video
+  margin: 0
+  padding: 0
+  border: 0
+  font-size: 100%
+  font: inherit
+  vertical-align: baseline
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section
+  display: block
+
+body
+  line-height: 1
+
+ol, ul
+  list-style: none
+
+blockquote, q
+  quotes: none
+
+blockquote:before, blockquote:after,
+q:before, q:after
+  content: ''
+  content: none
+
+table
+  border-collapse: collapse
+  border-spacing: 0
+
+// Common
+body, p, h1, h2, h3
+  font-family: 'Roboto', sans-serif
+
+body
+  background: #000000 url(../../images/background.jpg) no-repeat top center
+  background-size: 1000px
+  color: white
+
+  header
+    text-align: center
+
+    img
+      margin: 3em 0
+
+  main
+    text-align: center
+    max-width: 1280px
+    width: 70%
+    margin: 0 auto
+
+  footer
+
+.clearfix
+  display: inline-block
+
+  &:after
+    visibility: hidden
+    display: block
+    font-size: 0
+    content: " "
+    clear: both
+    height: 0
+
+.selected
+  border: 3px solid
+
+  animation-name: rainbow
+  animation-duration: 3s
+  animation-iteration-count: infinite
+
+// Entries
+#entries
+  margin: 3em 0
+  text-align: left
+
+  article
+    position: relative
+    vertical-align: top
+    display: inline-block
+    width: calc(50% - (1.5rem))
+    margin-bottom: 1.5rem
+    padding: 0 0.75rem
+
+    img
+      width: 100%
+
+    .votes
+      position: absolute
+      top: -1em
+      right: 0
+
+      display: block
+      height: 30px
+      line-height: 30px
+      width: 30px
+
+      text-align: center
+      background: #ff34db
+      border-radius: 50%
+      box-shadow: 3px 3px 0 rgba(255, 52, 219, 0.35)
+
+  > h3
+    font-size: 1.2em
+    margin-bottom: 2em
+
+  > button
+    margin: 2em auto
+    display: block
+
+  > *:not(article)
+    text-align: center
+
+// Animate
+@keyframes rainbow
+  0%
+    border-color: red
+  16.667%
+    border-color: orange
+  33.333%
+    border-color: yellow
+  49.998%
+    border-color: green
+  66.664%
+    border-color: blue
+  83.33%
+    border-color: indigo
+  100%
+    border-color: violet

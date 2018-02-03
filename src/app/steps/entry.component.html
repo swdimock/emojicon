@@ -1,0 +1,30 @@
+<div class="input-row">
+  <mat-form-field>
+    <span matPrefix>http:// </span>
+    <input
+            #urlInput
+            type="text"
+            matInput
+            placeholder="What are you waiting for, {{currentUser.name}}? Add an emoji url...">
+  </mat-form-field>
+  <button (click)="addNewUrl(urlInput.value)" mat-raised-button color="primary">Fire the Nukes!</button>
+</div>
+
+
+<section id="entries">
+  <h3 *ngIf="numOfEntries()">Great entries so far, {{currentUser.name}}! {{numOfEntries()}} out of 5.</h3>
+
+  <article *ngFor="let entry of currentUser.entries">
+    <img src="{{entry.file}}" />
+    <span class="remove"></span>
+  </article>
+
+  <div *ngIf="!numOfEntries()">
+    No emotigificons yet?!  Are you crazy?
+  </div>
+
+  <div class="clearfix"></div>
+
+  <button *ngIf="numOfEntries() >= 5" routerLink="/vote/{{currentUserId}}" mat-raised-button color="primary">You're done!  Let's go vote.</button>
+
+</section>

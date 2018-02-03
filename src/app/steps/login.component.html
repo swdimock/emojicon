@@ -1,0 +1,7 @@
+<mat-form-field>
+  <mat-select placeholder="What's your name???!??!" (change)="selectUser($event)">
+    <mat-option *ngFor="let entrant of listEntrants" value="{{entrant.id}}">
+      {{entrant.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
