@@ -24,7 +24,8 @@
   </div>
 
   <div class="clearfix"></div>
-
-  <button *ngIf="numOfEntries() >= 5" routerLink="/vote/{{currentUserId}}" mat-raised-button color="primary">You're done!  Let's go vote.</button>
-
 </section>
+
+<button *ngIf="numOfEntries() >= 5" routerLink="/vote/{{currentUserId}}" mat-raised-button color="primary">
+  You're done!  Let's go vote.
+</button>

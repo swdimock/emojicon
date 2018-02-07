@@ -103,9 +103,15 @@ export class EntrantsService {
 
     recordEntry(userId: number, url: string) {
 
-        const entrant = this.getEntrant(userId);
-        entrant.entries.push({
-            file: url
+        const entrant: any = this.getEntrant(userId);
+
+        if (!entrant) {
+            return;
+        }
+
+        entrant.entries.unshift({
+            file: url,
+            votes: []
         });
     }
 
@@ -113,9 +119,17 @@ export class EntrantsService {
 
         const entrant = this.getEntrant(userId);
 
+        if (!entrant) {
+            return;
+        }
+
         for (const e in entrant.entries) {
             if (entrant.entries.hasOwnProperty(e)) {
                 const entry = entrant.entries[e];
+
+                if (!entry.file) {
+                    continue;
+                }
 
                 if (entry.file === url && !(entry.votes.indexOf(userId) > -1)) {
                     entry.votes.push(userId);
@@ -129,11 +143,18 @@ export class EntrantsService {
 
         const entrant = this.getEntrant(userId);
 
+        if (!entrant) {
+            return;
+        }
+
         for (const e in entrant.entries) {
             if (entrant.entries.hasOwnProperty(e)) {
                 const entry = entrant.entries[e];
 
-                if (entry.file === url && (entry.votes.indexOf(userId) > -1)) {
+                if (
+                    entry.file === url &&
+                    typeof entry.votes !== 'undefined' &&
+                    (entry.votes.indexOf(userId) > -1)) {
                     return true;
                 }
             }

@@ -78,6 +78,9 @@ body {
   -webkit-animation-iteration-count: infinite;
           animation-iteration-count: infinite; }
 
+.mat-input-wrapper .mat-input-prefix, .mat-input-wrapper .mat-form-field-label {
+  color: #ff34db; }
+
 #entries {
   margin: 3em 0;
   text-align: left; }
@@ -85,15 +88,17 @@ body {
     position: relative;
     vertical-align: top;
     display: inline-block;
-    width: calc(50% - (1.5rem));
-    margin-bottom: 1.5rem;
-    padding: 0 0.75rem; }
+    float: left;
+    width: calc(50% - (0.25em));
+    margin-bottom: 0.25em;
+    padding: 0 0.125em; }
     #entries article img {
       width: 100%; }
     #entries article .votes {
       position: absolute;
-      top: -1em;
-      right: 0;
+      top: 0;
+      right: 0.125em;
+      margin: 5px;
       display: block;
       height: 30px;
       line-height: 30px;

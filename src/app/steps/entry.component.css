@@ -7,6 +7,7 @@
     margin-right: 1em;
 }
 
-.mat-form-field .mat-form-field-prefix {
-    color: rgba(0,0,0,.54);
+.mat-form-field .mat-form-field-prefix span {
+    color: #ff34db;
+    font-weight: bold;
 }

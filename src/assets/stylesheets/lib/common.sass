@@ -84,26 +84,36 @@ body
   animation-duration: 3s
   animation-iteration-count: infinite
 
+// Inputs
+.mat-input-wrapper
+
+  .mat-input-prefix, .mat-form-field-label
+    color: #ff34db
+
+
 // Entries
 #entries
   margin: 3em 0
   text-align: left
 
   article
+    $padding: 0.25em
     position: relative
     vertical-align: top
     display: inline-block
-    width: calc(50% - (1.5rem))
-    margin-bottom: 1.5rem
-    padding: 0 0.75rem
+    float: left
+    width: calc(50% - (#{$padding}))
+    margin-bottom: $padding
+    padding: 0 ($padding / 2)
 
     img
       width: 100%
 
     .votes
       position: absolute
-      top: -1em
-      right: 0
+      top: 0
+      right: ($padding / 2)
+      margin: 5px
 
       display: block
       height: 30px
