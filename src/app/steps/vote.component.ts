@@ -21,8 +21,8 @@ export class VoteComponent implements OnInit {
         });
     }
 
-    selectEntry(userId: number, url: string) {
-        this.entrants.recordVote(userId, url);
+    toggleEntry(userId: number, url: string) {
+        this.entrants.toggleVote(userId, url);
     }
 
     entrySelected(userId: number, url: string) {

@@ -63,6 +63,7 @@ body
     max-width: 1280px
     width: 70%
     margin: 0 auto
+    padding: 0 0 2.5em
 
   footer
 
@@ -96,34 +97,58 @@ body
   margin: 3em 0
   text-align: left
 
-  article
-    $padding: 0.25em
-    position: relative
-    vertical-align: top
-    display: inline-block
-    float: left
-    width: calc(50% - (#{$padding}))
-    margin-bottom: $padding
-    padding: 0 ($padding / 2)
+  .columns
+    column-width: 320px
+    column-gap: 1em
 
-    img
-      width: 100%
+    article
+      $padding: 0.5em
+      margin-bottom: 1em
+      position: relative
 
-    .votes
-      position: absolute
-      top: 0
-      right: ($padding / 2)
-      margin: 5px
+      &:hover
 
-      display: block
-      height: 30px
-      line-height: 30px
-      width: 30px
+        .remove
+          visibility: visible
+          opacity: 1
 
-      text-align: center
-      background: #ff34db
-      border-radius: 50%
-      box-shadow: 3px 3px 0 rgba(255, 52, 219, 0.35)
+      img
+        width: 100%
+
+      .remove, .votes
+        position: absolute
+        top: 0
+        right: ($padding / 2)
+        margin: 5px
+
+        display: block
+        height: 30px
+        line-height: 30px
+        width: 30px
+
+        text-align: center
+        border-radius: 50%
+
+      .remove
+        visibility: hidden
+        opacity: 0
+        background: #ff3847
+        box-shadow: 3px 3px 0 rgba(255, 56, 71, 0.35)
+        cursor: pointer
+
+        transition: opacity ease 0.25s
+
+        &:after
+          content: ''
+          display: block
+          height: 100%
+          width: 100%
+          mask: url(../../images/ic_close.svg) center
+          background-color: white
+
+      .votes
+        background: #ff34db
+        box-shadow: 3px 3px 0 rgba(255, 52, 219, 0.35)
 
   > h3
     font-size: 1.2em

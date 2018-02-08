@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSelectModule, MatInputModule, MatButtonModule } from '@angular/material';
+import { MatSelectModule, MatInputModule, MatButtonModule, MatIconModule } from '@angular/material';
 
 import { AppRoutingModule } from './modules/app-routing.module';
 
@@ -29,7 +29,8 @@ import { TabulateComponent } from './steps/tabulate.component';
         BrowserAnimationsModule,
         MatSelectModule,
         MatInputModule,
-        MatButtonModule
+        MatButtonModule,
+        MatIconModule
     ],
     providers: [EntrantsService, SlackService],
     bootstrap: [AppComponent]

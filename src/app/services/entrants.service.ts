@@ -29,7 +29,17 @@ export class EntrantsService {
         },
         {
             id: 2,
-            name: 'Nick'
+            name: 'Nick',
+            entries: [
+                {
+                    file: 'https://media.giphy.com/media/l3V0bMLX1oJhnWeNG/giphy.gif',
+                    votes: [1]
+                },
+                {
+                    file: 'https://media.giphy.com/media/xT0xeOz9FBhOaUvwWI/giphy.gif',
+                    votes: []
+                }
+            ]
         },
         {
             id: 3,
@@ -55,10 +65,21 @@ export class EntrantsService {
 
     constructor() {}
 
+    /**
+     * Get a list of all entrants
+     *
+     * @returns {Promise<any>}
+     */
     getEntrants(): Promise<any> {
         return Promise.resolve(this.entrants);
     }
 
+    /**
+     * Get data for a single entrant
+     *
+     * @param userId
+     * @returns {any}
+     */
     getEntrant(userId: any) {
         for (const e in Object.keys(this.entrants)) {
             if (this.entrants.hasOwnProperty(e)) {
@@ -72,6 +93,11 @@ export class EntrantsService {
         return false;
     }
 
+    /**
+     * Return all entries
+     *
+     * @returns {Promise<any>}
+     */
     getEntries(): Promise<any> {
 
         const entries = [];
@@ -101,6 +127,12 @@ export class EntrantsService {
         return Promise.resolve(entries);
     }
 
+    /**
+     * Add a new entry to the user's entry object
+     *
+     * @param {number} userId
+     * @param {string} url
+     */
     recordEntry(userId: number, url: string) {
 
         const entrant: any = this.getEntrant(userId);
@@ -115,11 +147,17 @@ export class EntrantsService {
         });
     }
 
-    recordVote(userId: number, url: string) {
+    /**
+     * Increment the vote count for a given entry
+     *
+     * @param {number} userId
+     * @param {string} url
+     */
+    toggleVote(userId: number, url: string) {
 
         const entrant = this.getEntrant(userId);
 
-        if (!entrant) {
+        if (!entrant || this.maxNumEntries(userId)) {
             return;
         }
 
@@ -131,14 +169,58 @@ export class EntrantsService {
                     continue;
                 }
 
-                if (entry.file === url && !(entry.votes.indexOf(userId) > -1)) {
-                    entry.votes.push(userId);
+                if (entry.file === url) {
+                    if (!(entry.votes.indexOf(userId) > -1)) {
+                        entry.votes.push(userId);
+                    }
+                    // else if (entry.votes.indexOf(userId) > -1) {
+                    //     const u = entry.votes.indexOf(userId);
+                    //     entry.votes.splice(u, 1);
+                    // }
                     break;
                 }
             }
         }
     }
 
+    /**
+     * Return boolean whether max number of votes has been reached
+     *
+     * @param {number} userId
+     * @returns {boolean}
+     */
+    maxNumEntries(userId: number) {
+
+        let votes = 0;
+
+        for (const e in this.entrants) {
+            if (this.entrants.hasOwnProperty(e)) {
+                const entrant = this.entrants[e];
+
+                if (typeof entrant.entries !== 'undefined') {
+                    for (const f in entrant.entries) {
+
+                        if (entrant.entries.hasOwnProperty(f)) {
+                            const entries = entrant.entries[f];
+
+                            if (typeof entries.votes !== 'undefined' && entries.votes.indexOf(userId) > -1) {
+                                votes++;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return votes >= 5;
+    }
+
+    /**
+     * Identify whether the given entry is selected
+     *
+     * @param {number} userId
+     * @param {string} url
+     * @returns {boolean}
+     */
     isEntrySelected(userId: number, url: string) {
 
         const entrant = this.getEntrant(userId);
@@ -162,8 +244,38 @@ export class EntrantsService {
         return false;
     }
 
+    /**
+     * Remove an entry from the user's entry object.
+     *
+     * @param {number} userId
+     * @param {string} url
+     */
     deleteEntry(userId: number, url: string) {
-        alert('NO TAKE BACKS!!');
+
+        if (confirm('Sure about that?')) {
+
+            const entrant = this.getEntrant(userId);
+            console.log(entrant);
+
+            if (!entrant) {
+                return;
+            }
+
+            for (const e in entrant.entries) {
+                if (entrant.entries.hasOwnProperty(e)) {
+                    const entry = entrant.entries[e];
+
+                    if (!entry.file) {
+                        continue;
+                    }
+
+                    if (entry.file === url && !(entry.votes.indexOf(userId) > -1)) {
+                        entrant.entries.splice(+e, 1);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
 }

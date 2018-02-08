@@ -57,7 +57,8 @@ body {
     text-align: center;
     max-width: 1280px;
     width: 70%;
-    margin: 0 auto; }
+    margin: 0 auto;
+    padding: 0 0 2.5em; }
 
 .clearfix {
   display: inline-block; }
@@ -84,30 +85,51 @@ body {
 #entries {
   margin: 3em 0;
   text-align: left; }
-  #entries article {
-    position: relative;
-    vertical-align: top;
-    display: inline-block;
-    float: left;
-    width: calc(50% - (0.25em));
-    margin-bottom: 0.25em;
-    padding: 0 0.125em; }
-    #entries article img {
-      width: 100%; }
-    #entries article .votes {
-      position: absolute;
-      top: 0;
-      right: 0.125em;
-      margin: 5px;
-      display: block;
-      height: 30px;
-      line-height: 30px;
-      width: 30px;
-      text-align: center;
-      background: #ff34db;
-      border-radius: 50%;
-      -webkit-box-shadow: 3px 3px 0 rgba(255, 52, 219, 0.35);
-              box-shadow: 3px 3px 0 rgba(255, 52, 219, 0.35); }
+  #entries .columns {
+    -webkit-column-width: 320px;
+            column-width: 320px;
+    -webkit-column-gap: 1em;
+            column-gap: 1em; }
+    #entries .columns article {
+      margin-bottom: 1em;
+      position: relative; }
+      #entries .columns article:hover .remove {
+        visibility: visible;
+        opacity: 1; }
+      #entries .columns article img {
+        width: 100%; }
+      #entries .columns article .remove, #entries .columns article .votes {
+        position: absolute;
+        top: 0;
+        right: 0.25em;
+        margin: 5px;
+        display: block;
+        height: 30px;
+        line-height: 30px;
+        width: 30px;
+        text-align: center;
+        border-radius: 50%; }
+      #entries .columns article .remove {
+        visibility: hidden;
+        opacity: 0;
+        background: #ff3847;
+        -webkit-box-shadow: 3px 3px 0 rgba(255, 56, 71, 0.35);
+                box-shadow: 3px 3px 0 rgba(255, 56, 71, 0.35);
+        cursor: pointer;
+        -webkit-transition: opacity ease 0.25s;
+        transition: opacity ease 0.25s; }
+        #entries .columns article .remove:after {
+          content: '';
+          display: block;
+          height: 100%;
+          width: 100%;
+          -webkit-mask: url(../../images/ic_close.svg) center;
+                  mask: url(../../images/ic_close.svg) center;
+          background-color: white; }
+      #entries .columns article .votes {
+        background: #ff34db;
+        -webkit-box-shadow: 3px 3px 0 rgba(255, 52, 219, 0.35);
+                box-shadow: 3px 3px 0 rgba(255, 52, 219, 0.35); }
   #entries > h3 {
     font-size: 1.2em;
     margin-bottom: 2em; }
