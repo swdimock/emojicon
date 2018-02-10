@@ -50,7 +50,8 @@ body {
   background-size: 1000px;
   color: white; }
   body header {
-    text-align: center; }
+    text-align: center;
+    outline: none; }
     body header img {
       margin: 3em 0; }
   body main {
@@ -85,6 +86,10 @@ body {
 #entries {
   margin: 3em 0;
   text-align: left; }
+  #entries .list article img {
+    border: 4px solid;
+    -webkit-animation: rainbow 5s infinite alternate;
+            animation: rainbow 5s infinite alternate; }
   #entries .columns {
     -webkit-column-width: 320px;
             column-width: 320px;
@@ -132,7 +137,11 @@ body {
                 box-shadow: 3px 3px 0 rgba(255, 52, 219, 0.35); }
   #entries > h3 {
     font-size: 1.2em;
-    margin-bottom: 2em; }
+    font-weight: bold;
+    margin-bottom: 2em;
+    margin-top: -25px;
+    color: #ff34db;
+    text-transform: uppercase; }
   #entries > button {
     margin: 2em auto;
     display: block; }

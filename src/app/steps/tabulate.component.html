@@ -1,3 +1,15 @@
-<p>
-  tabulate works!
-</p>
+<section id="entries">
+    <h3>And the results are in:</h3>
+
+    <div class="list">
+        <article *ngFor="let entry of topResults; let i = index">
+            <span *ngIf="i < maxVotes()">
+                <p class="name">
+                    {{getEntrantName(entry.entrant)}} -
+                    {{entry.votes}} vote<span *ngIf="entry.votes > 1">s</span>
+                </p>
+                <img src="{{entry.file}}" />
+            </span>
+        </article>
+    </div>
+</section>

@@ -13,3 +13,7 @@
 
   <div class="clearfix"></div>
 </section>
+
+<button *ngIf="totalReached()" routerLink="/tabulate" mat-raised-button color="primary">
+  Everyone has voted!  Let's check the winners.
+</button>

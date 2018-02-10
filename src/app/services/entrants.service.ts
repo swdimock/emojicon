@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class EntrantsService {
 
-    public currentEntrant: any;
+    public maxVotes = 5;
     private entrants = [
         {
             id: 1,
@@ -96,9 +96,10 @@ export class EntrantsService {
     /**
      * Return all entries
      *
+     * @param {boolean} skipSelf
      * @returns {Promise<any>}
      */
-    getEntries(): Promise<any> {
+    getEntries(userId): Promise<any> {
 
         const entries = [];
 
@@ -111,6 +112,11 @@ export class EntrantsService {
                 for (const l in entrant.entries) {
                     if (entrant.entries.hasOwnProperty(l)) {
                         const entry = entrant.entries[l];
+
+                        // Only include entries that are not submitted by the current user
+                        if (entrant.id === Number(userId)) {
+                            continue;
+                        }
 
                         // If the file is there, then add it to our list
                         if (typeof entry.file !== 'undefined') {
@@ -156,8 +162,9 @@ export class EntrantsService {
     toggleVote(userId: number, url: string) {
 
         const entrant = this.getEntrant(userId);
+        const maxEntries = this.maxNumEntries(userId);
 
-        if (!entrant || this.maxNumEntries(userId)) {
+        if (!entrant) {
             return;
         }
 
@@ -171,12 +178,13 @@ export class EntrantsService {
 
                 if (entry.file === url) {
                     if (!(entry.votes.indexOf(userId) > -1)) {
-                        entry.votes.push(userId);
+                        if (!maxEntries) {
+                            entry.votes.push(userId);
+                        }
+                    } else {
+                        const u = entry.votes.indexOf(userId);
+                        entry.votes.splice(u, 1);
                     }
-                    // else if (entry.votes.indexOf(userId) > -1) {
-                    //     const u = entry.votes.indexOf(userId);
-                    //     entry.votes.splice(u, 1);
-                    // }
                     break;
                 }
             }
@@ -211,7 +219,50 @@ export class EntrantsService {
                 }
             }
         }
-        return votes >= 5;
+        return votes >= this.maxVotes;
+    }
+
+    /**
+     * Counts the number of overall votes recorded
+     *
+     * @returns {number}
+     */
+    totalNumVotes() {
+
+        let votes = 0;
+
+        for (const e in this.entrants) {
+            if (this.entrants.hasOwnProperty(e)) {
+                const entrant = this.entrants[e];
+
+                if (typeof entrant.entries !== 'undefined') {
+                    for (const f in entrant.entries) {
+
+                        if (entrant.entries.hasOwnProperty(f)) {
+                            const entries = entrant.entries[f];
+
+                            if (typeof entries.votes !== 'undefined') {
+                                votes += entries.votes.length;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return votes;
+    }
+
+    /**
+     * Check whether the maximum number of votes have been reached
+     *
+     * @returns {boolean}
+     */
+    totalVotesReached() {
+
+        const entrants = this.entrants.length;
+        const max = entrants * this.maxVotes;
+
+       return max <= Number(this.totalNumVotes());
     }
 
     /**

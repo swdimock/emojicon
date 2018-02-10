@@ -1,0 +1,19 @@
+#entries .list {
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+#entries .list article {
+    margin-bottom: 3rem
+}
+
+#entries p.name {
+    font-size: 1em;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 1em;
+}
+
+#entries img {
+    width: 100%;
+}
